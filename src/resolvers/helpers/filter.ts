@@ -177,6 +177,8 @@ function convertFilterFields(
       toMongoFilterDottedObject(value, subAlias, clearedFilter, newKey);
     }
   });
-
+  
+  // Quick fix for https://github.com/graphql-compose/graphql-compose-mongoose/issues/315 
+  Object.keys(clearedFilter).forEach((k) => { if (schemaFields[k] === undefined) delete clearedFilter[k];});
   return clearedFilter;
 }
